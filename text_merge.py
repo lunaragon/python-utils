@@ -2,7 +2,6 @@
 # example
 python text_merge.py [file1, file2, file3...] merged_file
 """
-import os
 import sys
 import pathlib
 import fire

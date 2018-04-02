@@ -1,3 +1,7 @@
 .vscode
 output*
 output/*
+test_file*
+test_file/*
+*temp*
+*test*

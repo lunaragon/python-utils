@@ -54,8 +54,9 @@ class TextSpliter(object):
 
                 if line == '':
                     output_file.close()
-                    raise EOFError('Finished. Totally splited into {number} files'.format(
-                        number=output_file_index))
+                    raise EOFError(
+                        'Finished. Totally splited into {number} files'.format(
+                            number=output_file_index))
 
                 output_file.write(line)
             # close file
