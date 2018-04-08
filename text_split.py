@@ -22,7 +22,8 @@ PROJECT_PATH = pathlib.Path(os.path.abspath(__file__)).parent
 
 
 class TextSpliter(object):
-
+    """Split Text by line-number or file-number
+    """♢
     def __init__(self, input_file, output_dir):
         self.input_file = CWD / input_file
         self.output_dir = CWD / output_dir

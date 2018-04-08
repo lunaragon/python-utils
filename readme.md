@@ -8,9 +8,11 @@
 
 ```bash
 # 从指定文件中随机取出一定行数
-python shuffle.py --input_file input_file --output_file output_file --number line_number
+python shuffle.py --input-file input_file --output-file output_file --number line_number
 # 从指定文件中随机取出一定百分比的内容 (按行):  parameter: percent valued from 0 to 1
-python shuffle.py --input_file input_file --output_file output_file --percent percent
+python shuffle.py --input-file input_file --output-file output_file --percent percent
+# 未指定行数与百分比，则将原文本打乱
+python shuffle.py --intput-file input_file --output-file output_file
 ```
 
 ## 2. 文本拆分 (按行)
@@ -29,7 +31,10 @@ python text_split.py --input-file input_file --output-dir output_dir --by-file-n
 > text_merge.py
 
 ```bash
-python text_merge.py [file1, file2, file3, ..., fileN] merged_file
+# 多个文件合并成一个文件
+python text_merge.py by-file [filename1, filename2, filename3, ..., filenameN] merged_file
+# 将指定目录下的所有文件（不递归）合并成一个文件
+python text_merge.py by-dir dir_name merged_file
 ```
 
 ## 4. 指定文件下重命名

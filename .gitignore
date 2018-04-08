@@ -5,3 +5,4 @@ test_file*
 test_file/*
 *temp*
 *test*
+__pycache__
