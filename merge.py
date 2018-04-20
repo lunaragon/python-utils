@@ -12,7 +12,9 @@ CWD = pathlib.Path.cwd()
 @click.command()
 @click.argument('items', nargs=-1, type=str)
 @click.argument('merged_file', nargs=1, type=click.File('wb'))
-def merge(items, merged_file):
+@click.option('--recur', is_flag=True, default=False,
+    help='merge content in child directory, default=False')
+def merge(items, merged_file, recur):
     """Merge files or directory into one single file\n
     Example\n
     \tpython merge.py file1, file2, [file3, file4,] merged_file\n
@@ -26,7 +28,7 @@ def merge(items, merged_file):
     
     for item in item_path:
         if item.is_dir():
-            merge_dir(item, merged_file)
+            merge_dir(item, merged_file, recur)
         elif item.is_file():
             merge_file(item, merged_file)
         else:
@@ -37,13 +39,18 @@ def merge(items, merged_file):
     print('Merged', ', '.join(items), 'into ', merged_file.name)
 
 
-def merge_dir(dir_path, merged_file):
+def merge_dir(dir_path, merged_file, recur):
     for item in dir_path.iterdir():
         if item.is_file():
             merge_file(item, merged_file)
         elif item.is_dir():
-            merge_dir(item, merged_file) # recure call 
-
+            if recur:
+                merge_dir(item, merged_file) # recure call
+            else:
+                click.secho('[Warning] {item} skiped, non file nor directory'.format(
+                        item=item.name
+                    ), fg='yellow', bold=True)
+        else:
 
 def merge_file(file_path, merged_file):
     [merged_file.write(line) for line in open(file_path, 'rb')]
